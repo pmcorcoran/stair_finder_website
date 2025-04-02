@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required, get_coord, get_add
 
-google_api = 'AIzaSyB8tBulyh-SduPrWVmryVfx4uuLC1_wrgA'
+google_api = os.environ.get("GOOGLE_API_KEY")
 
 # Configure application
 app = Flask(__name__)
