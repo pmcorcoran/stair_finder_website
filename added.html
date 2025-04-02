@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Added Stairs
+{% endblock %}
+
+{% block main %}
+    <form action="/addstairs" method="post">
+        <h2>You added:</h2>
+
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+
+        <script>
+        function myMap() {
+        var myCenter = new google.maps.LatLng({{ lat }}, {{ lng }});
+        var mapProp= {
+          center: myCenter,
+          zoom:15,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        var centerMarker = new google.maps.Marker({position: myCenter});
+        centerMarker.setMap(map);
+        }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=myMap"></script>
+        <!--h3>With the image:</h3-->
+        <!--img src="{{ photo }}" alt="photo" width="600"-->
+
+    </form>
+    <div id ="map"></div>
+{% endblock %}

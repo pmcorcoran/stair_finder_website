@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+
+    <form action="/search" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="location" placeholder="Address" type="text">
+        </div>
+        <button class="btn btn-primary" name="street" type="submit">Search</button>
+        <p>{{ alert }}</p>
+    </form>
+
+{% endblock %}

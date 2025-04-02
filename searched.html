@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stairs
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+    <form action="/search" method="post">
+        <!--h1>Stairs:</h1-->
+        <!--iframe
+            width="450"
+            height="250"
+            frameborder="0" style="border:0"
+            src="{{ url }}" allowfullscreen>
+        </iframe -->
+        <h1>Stairs</h1>
+
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+
+        <script>
+        function myMap() {
+        var myCenter = new google.maps.LatLng({{ lat }}, {{ lng }});
+        var mapProp= {
+          center: myCenter,
+          zoom:10,
+          title: "Your Location"
+        };
+
+        const map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        var centerMarker = new google.maps.Marker({position: myCenter});
+        centerMarker.setMap(map);
+
+        var staircases = {{ stairs }};
+        var marker, i;
+        for (i = 0; i < staircases.length; i++) {
+            console.log(i);
+            console.log(staircases[i]);
+            stair = staircases[i];
+            var location = new google.maps.LatLng(stair[0], stair[1]);
+            marker = new google.maps.Marker({position: location});
+            marker.setMap(map);
+        }
+        }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=myMap"></script>
+
+
+        <h2>Closest stairs are located at:</h2>
+        <style>
+            ul {
+                    text-align: center;
+                    list-style-position: inside;
+                }
+        </style>
+        <ul>
+            {% for addr in address %}
+            <li>{{ addr }}</li>
+            {% endfor %}
+        </ul>
+
+    </form>
+
+    <div id="map"></div>
+{% endblock %}
+
